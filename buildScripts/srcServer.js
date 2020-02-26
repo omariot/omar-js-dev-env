@@ -3,11 +3,11 @@ import path from 'path';
 import open from 'open';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
+import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
-
 app.use(require('webpack-dev-middleware') (compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
