@@ -1,9 +1,17 @@
-var express = require('express');
-var path = require('path');
-var open = require('open');
+import express from 'express';
+import path from 'path';
+import open from 'open';
+import webpack from 'webpack';
+import config from '../webpack.config.dev';
 
-var port = 3000;
-var app = express();
+const port = 3000;
+const app = express();
+const compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware') (compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+}));
 
 app.use('/', function(req, res) {
 
@@ -15,6 +23,6 @@ app.listen(port, function(err) {
         console.log(err);
     }else{
         console.log('Server running in port ' + port);
-        open('http://localhost:' + port);
+        open('http://localhost:' + port, {app: ['chrome']});
     }
 });
