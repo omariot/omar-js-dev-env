@@ -3,7 +3,8 @@ import path from 'path';
 import open from 'open';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
+
+/* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
