@@ -4,12 +4,15 @@
   "description": "JavaScript development environment Pluralsight course by Cory House",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
-    "start": "npm-run-all --parallel secury-check open:src",
+    "start": "npm-run-all --parallel secury-check open:src lint:watch test:watch",
     "open:src": "babel-node buildScripts/srcServer.js",
     "lint": "esw webpack.config.*  src  buildScripts --color",
+    "lint:watch": "npm run lint -- --watch",
     "secury-check": "npm audit --audit-level high",
     "localtunnel": "lt --port 3000",
-    "share": "npm-run-all --parallel open:src localtunnel"
+    "share": "npm-run-all --parallel open:src localtunnel",
+    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Cory House",
   "license": "MIT",
@@ -17,7 +20,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.8.6",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
@@ -34,13 +37,13 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-watch": "^6.0.1",
     "express": "^4.17.1",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "extract-text-webpack-plugin": ">=3.0.2 <=3",
     "html-webpack-plugin": "^3.2.0",
     "jsdom": "^16.2.0",
     "json-schema-faker": "^0.5.0-rc23",
     "json-server": "^0.16.1",
     "localtunnel": "^2.0.0",
-    "mocha": "^7.0.1",
+    "mocha": "^7.1.0",
     "nock": "^12.0.1",
     "npm-run-all": "^4.1.5",
     "numeral": "^2.0.6",
